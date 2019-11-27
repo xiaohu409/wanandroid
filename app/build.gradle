@@ -7,10 +7,10 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 android {
     signingConfigs {
         signingconfig {
-            storeFile file('E:\\AndroidStudioProject\\WanAndroid\\key.jks')
-            storePassword 'xiaohu409'
-            keyAlias = 'xiaohu409'
-            keyPassword 'xiaohu409'
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
         }
     }
     compileSdkVersion rootProject.ext.compileSdkVersion
