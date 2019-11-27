@@ -3,6 +3,7 @@ package com.github.xiaohu409.wanandroid.mvc.base;
 import android.app.Application;
 import android.content.ComponentCallbacks2;
 
+import com.github.xiaohu409.wanandroid.mvc.util.ImageLoaderUtil;
 import com.github.xiaohu409.wanandroid.mvc.util.SharePreUtil;
 import com.github.xiaohu409.wanandroid.mvc.util.ToastUtil;
 
@@ -21,6 +22,7 @@ public class App extends Application {
         super.onCreate();
         ToastUtil.initToastUtil(this);
         SharePreUtil.initSharePreUtil(this);
+        ImageLoaderUtil.initImageLoader(this);
     }
 
     /**
