@@ -24,7 +24,6 @@ import java.util.List;
  */
 public class BlankFragment1 extends Fragment {
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

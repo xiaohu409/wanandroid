@@ -44,8 +44,6 @@ public class HtBanner extends FrameLayout {
         initView();
     }
 
-
-
     private void initView() {
         //viewPager = new ViewPager(getContext());
         View view = View.inflate(getContext(), R.layout.ht_banner, this);
