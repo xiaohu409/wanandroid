@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.viewpager.widget.ViewPager;
 
 import com.github.xiaohu409.wanandroid.R;
@@ -34,6 +35,7 @@ public class BlankFragment1 extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         List<HtBanner.ImageItem> list = new ArrayList<>();
         String url = "https://www.wanandroid.com/blogimgs/fa822a30-00fc-4e0d-a51a-d704af48205c.jpeg";
         for (int i = 0; i < 3; i++) {
@@ -42,7 +44,7 @@ public class BlankFragment1 extends Fragment {
             list.add(imageItem);
         }
         HtBanner banner = getView().findViewById(R.id.banner_id);
-        banner.addImageItemList(list).setImageLoader(new HtBanner.ImageLoader() {
+        banner.setDelayTime(4000).addImageItemList(list).setImageLoader(new HtBanner.ImageLoader() {
             @Override
             public void displayImage(String url, ImageView imageView) {
                 ImageLoaderUtil.displayImage(url, imageView);
