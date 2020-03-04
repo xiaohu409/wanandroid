@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mvc.controller.BlankFragment2">
+    tools:context=".mvc.controller.BlankFragment2"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
     <ImageView
@@ -12,4 +14,6 @@
         android:id="@+id/iv_id"
         android:scaleType="centerCrop"/>
 
-</FrameLayout>
+
+
+</LinearLayout>

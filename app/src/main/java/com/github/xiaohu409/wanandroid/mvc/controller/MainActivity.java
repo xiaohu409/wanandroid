@@ -2,6 +2,7 @@ package com.github.xiaohu409.wanandroid.mvc.controller;
 
 import com.github.xiaohu409.wanandroid.R;
 import com.github.xiaohu409.wanandroid.mvc.base.BaseActivity;
+import com.github.xiaohu409.wanandroid.mvc.util.ToastUtil;
 import com.github.xiaohu409.wanandroid.mvc.widget.CircleTabHost;
 
 /**
@@ -39,6 +40,7 @@ public class MainActivity extends BaseActivity implements CircleTabHost.OnTabLis
         //配置FragmentManager和Content id
         circleTabHost.setup(getSupportFragmentManager(), R.id.content_id);
         circleTabHost.setOnTabListener(this);
+
     }
 
     @Override

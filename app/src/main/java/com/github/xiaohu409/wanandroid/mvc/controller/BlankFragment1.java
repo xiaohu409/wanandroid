@@ -9,7 +9,6 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.viewpager.widget.ViewPager;
 
 import com.github.xiaohu409.wanandroid.R;
@@ -65,5 +64,6 @@ public class BlankFragment1 extends Fragment {
 
             }
         }).start();
+
     }
 }
