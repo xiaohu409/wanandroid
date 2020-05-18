@@ -13,6 +13,12 @@ import android.graphics.drawable.Drawable;
  */
 public class DrawableUtil {
 
+    /**
+     * 获取 Drawable
+     * @param context
+     * @param rId
+     * @return
+     */
     public static Drawable getDrawable(Context context, int rId) {
         Drawable drawable = context.getResources().getDrawable(rId);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumWidth());
