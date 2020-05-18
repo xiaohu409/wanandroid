@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2018 沈阳添美科技有限公司
- */
-
 package com.github.xiaohu409.wanandroid.mvc.util;
 
 import android.content.Context;

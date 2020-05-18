@@ -1,6 +1,5 @@
 package com.github.xiaohu409.wanandroid.mvc.util;
 
-
 import com.github.xiaohu409.wanandroid.BuildConfig;
 import com.github.xiaohu409.wanandroid.mvc.api.ServiceApi;
 

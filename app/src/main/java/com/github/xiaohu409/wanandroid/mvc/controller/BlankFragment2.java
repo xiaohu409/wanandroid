@@ -1,6 +1,5 @@
 package com.github.xiaohu409.wanandroid.mvc.controller;
 
-
 import com.github.xiaohu409.wanandroid.R;
 import com.github.xiaohu409.wanandroid.mvc.base.BaseFragment;
 

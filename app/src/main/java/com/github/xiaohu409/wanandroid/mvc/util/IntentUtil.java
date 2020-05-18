@@ -1,7 +1,6 @@
 package com.github.xiaohu409.wanandroid.mvc.util;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 
 /**

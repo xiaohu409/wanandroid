@@ -1,6 +1,5 @@
 package com.github.xiaohu409.wanandroid.mvc.controller;
 
-import android.os.Bundle;
 import android.widget.ImageView;
 
 import androidx.viewpager.widget.ViewPager;
