@@ -20,6 +20,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.github.xiaohu409.wanandroid.R;
+import com.github.xiaohu409.wanandroid.mvc.util.LogUtil;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -33,7 +34,9 @@ import java.util.List;
  * 创建日期：2019/11/27
  * 文件版本：1.0
  */
-public class HtBanner extends FrameLayout {
+public class HtBanner extends FrameLayout implements HtBannerCallback {
+
+    private static final String TAG = "HtBanner";
 
     private ViewPager viewPager;
     private List<ImageItem> mImageItemList;
@@ -44,6 +47,8 @@ public class HtBanner extends FrameLayout {
     private static int currentIndex = 0;
     private HtBannerLifecycle lifecycle;
     //private ImagePagerAdapter pagerAdapter;
+    private ImagePagerAdapter.HtBannerClick htBannerClick;
+    private boolean isStart;
 
     public HtBanner(@NonNull Context context) {
         this(context, null);
@@ -94,7 +99,15 @@ public class HtBanner extends FrameLayout {
     }
 
     public void start() {
+        if (isStart) {
+            return;
+        }
+        isStart = true;
         ImagePagerAdapter pagerAdapter = new ImagePagerAdapter(getContext(), mImageItemList, mImageLoader);
+        pagerAdapter.setBannerCallback(this);
+        if (htBannerClick != null) {
+            pagerAdapter.setHtBannerClick(htBannerClick);
+        }
         viewPager.setAdapter(pagerAdapter);
         pagerAdapter.notifyDataSetChanged();
         handler.sendEmptyMessageDelayed(BANNER_WHAT, delayTime);
@@ -104,22 +117,17 @@ public class HtBanner extends FrameLayout {
     public void stop() {
         if (handler.hasMessages(BANNER_WHAT)) {
             handler.removeMessages(BANNER_WHAT);
+            isStart = false;
         }
         //((LifecycleOwner)getContext()).getLifecycle().removeObserver(lifecycle);
     }
 
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-        //return super.onInterceptTouchEvent(ev);
-        switch (ev.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                stop();
-                break;
-            case MotionEvent.ACTION_UP:
-                start();
-                break;
+    private void restart() {
+        if (isStart) {
+            return;
         }
-        return super.onInterceptTouchEvent(ev);
+        isStart = true;
+        handler.sendEmptyMessageDelayed(BANNER_WHAT, delayTime);
     }
 
     private static class MHandler extends Handler {
@@ -150,6 +158,7 @@ public class HtBanner extends FrameLayout {
 
         String imageTitle;
         String imageUrl;
+        String url;
 
         public String getImageTitle() {
             return imageTitle;
@@ -166,6 +175,14 @@ public class HtBanner extends FrameLayout {
         public void setImageUrl(String imageUrl) {
             this.imageUrl = imageUrl;
         }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
     }
 
     public static class ImagePagerAdapter extends PagerAdapter {
@@ -173,6 +190,8 @@ public class HtBanner extends FrameLayout {
         private Context context;
         private List<ImageItem> list;
         private ImageLoader imageLoader;
+        private HtBannerClick htBannerClick;
+        private HtBannerCallback bannerCallback;
 
         public ImagePagerAdapter(Context context, List<ImageItem> list, ImageLoader imageLoader) {
             this.context = context;
@@ -188,9 +207,36 @@ public class HtBanner extends FrameLayout {
         @NonNull
         @Override
         public Object instantiateItem(@NonNull ViewGroup container, int position) {
-            ImageItem imageItem = list.get(position);
-            ImageView imageView = new ImageView(context);
+            final ImageItem imageItem = list.get(position);
+            BannerImage imageView = new BannerImage(context);
+
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+            imageView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (htBannerClick != null) {
+                        htBannerClick.onBannerClick(v, imageItem);
+
+                    }
+                }
+            });
+            imageView.setBannerImageCallback(new BannerImage.BannerImageCallback() {
+                @Override
+                public void onMove(View view) {
+                    if (bannerCallback != null) {
+                        bannerCallback.onMove();
+                    }
+                }
+
+                @Override
+                public void onCancel(View view) {
+                    if (bannerCallback != null) {
+                        bannerCallback.onCancel();
+                    }
+                }
+
+            });
             imageLoader.displayImage(imageItem.getImageUrl(), imageView);
             container.addView(imageView);
             return imageView;
@@ -204,6 +250,21 @@ public class HtBanner extends FrameLayout {
         @Override
         public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
             container.removeView((View) object);
+        }
+
+        /**
+         * 点击事件
+         */
+        public interface HtBannerClick {
+            void onBannerClick(View view, ImageItem imageItem);
+        }
+
+        public void setHtBannerClick(HtBannerClick htBannerClick) {
+            this.htBannerClick = htBannerClick;
+        }
+
+        public void setBannerCallback(HtBannerCallback bannerCallback) {
+            this.bannerCallback = bannerCallback;
         }
     }
 
@@ -227,18 +288,32 @@ public class HtBanner extends FrameLayout {
 //        }
 //        @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
 //        void onResume() {
-//            htBanner.start();
-//        }
-//
-//        @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-//        void onPasue() {
-//            htBanner.stop();
+//            htBanner.restart();
 //        }
 
-        @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-        void onStop() {
+        @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+        void onPasue() {
             htBanner.stop();
         }
 
+//        @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+//        void onStop() {
+//            htBanner.stop();
+//        }
+
+    }
+
+    public void setHtBannerClick(ImagePagerAdapter.HtBannerClick htBannerClick) {
+        this.htBannerClick = htBannerClick;
+    }
+
+    @Override
+    public void onMove() {
+        stop();
+    }
+
+    @Override
+    public void onCancel() {
+        restart();
     }
 }

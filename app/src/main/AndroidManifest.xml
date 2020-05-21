@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.github.xiaohu409.wanandroid">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -13,7 +12,8 @@
         android:roundIcon="@mipmap/app_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".mvc.base.BaseTitleBarActivity"></activity>
+        <activity android:name=".mvc.controller.WebViewActivity" />
         <activity android:name=".mvc.controller.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

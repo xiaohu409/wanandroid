@@ -41,4 +41,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseUI, 
     public void bindData() {
 
     }
+
+
 }

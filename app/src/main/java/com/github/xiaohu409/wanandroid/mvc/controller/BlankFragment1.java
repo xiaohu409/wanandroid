@@ -1,8 +1,8 @@
 package com.github.xiaohu409.wanandroid.mvc.controller;
 
+import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
-
-import androidx.viewpager.widget.ViewPager;
 
 import com.github.xiaohu409.wanandroid.R;
 import com.github.xiaohu409.wanandroid.mvc.base.BaseFragment;
@@ -10,6 +10,7 @@ import com.github.xiaohu409.wanandroid.mvc.model.BannerModel;
 import com.github.xiaohu409.wanandroid.mvc.model.BannerModelImpl;
 import com.github.xiaohu409.wanandroid.mvc.model.bean.BannerBean;
 import com.github.xiaohu409.wanandroid.mvc.util.ImageLoaderUtil;
+import com.github.xiaohu409.wanandroid.mvc.util.IntentUtil;
 import com.github.xiaohu409.wanandroid.mvc.util.ToastUtil;
 import com.github.xiaohu409.wanandroid.mvc.view.BannerView;
 import com.github.xiaohu409.wanandroid.mvc.widget.HtBanner;
@@ -45,20 +46,14 @@ public class BlankFragment1 extends BaseFragment {
             public void displayImage(String url, ImageView imageView) {
                 ImageLoaderUtil.displayImage(url, imageView);
             }
-        }).addOnPageListener(new ViewPager.OnPageChangeListener() {
+        });
+        banner.setHtBannerClick(new HtBanner.ImagePagerAdapter.HtBannerClick() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                ToastUtil.showShort(String.valueOf(position));
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
+            public void onBannerClick(View view, HtBanner.ImageItem imageItem) {
+//                ToastUtil.showShort(imageItem.getUrl());
+                Bundle data = new Bundle();
+                data.putString("url", imageItem.getUrl());
+                IntentUtil.startActivity(getActivity(), WebViewActivity.class, data);
             }
         });
     }
@@ -70,7 +65,6 @@ public class BlankFragment1 extends BaseFragment {
     }
 
     private void getBanner() {
-
         bannerModel.getBanner(new BannerView<BannerBean>() {
             @Override
             public void onSuccess(BannerBean result) {
@@ -86,6 +80,7 @@ public class BlankFragment1 extends BaseFragment {
                     HtBanner.ImageItem imageItem = new HtBanner.ImageItem();
                     imageItem.setImageTitle(bean.getTitle());
                     imageItem.setImageUrl(bean.getImagePath());
+                    imageItem.setUrl(bean.getUrl());
                     bannerList.add(imageItem);
                 }
                 banner.addImageItemList(bannerList);

@@ -2,6 +2,7 @@ package com.github.xiaohu409.wanandroid.mvc.util;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 
 /**
  * 项目名称：WanAndroid
@@ -13,13 +14,18 @@ import android.content.Intent;
  */
 public class IntentUtil {
 
-    public static void startIntent(Activity activity, Class<?> cls) {
+    public static void startActivity(Activity activity, Class<?> cls) {
         Intent intent = new Intent(activity, cls);
         activity.startActivity(intent);
-        activity.finish();
     }
 
-    public static void startIntentAndFinish(Activity activity, Class<?> cls) {
+    public static void startActivity(Activity activity, Class<?> cls, Bundle data) {
+        Intent intent = new Intent(activity, cls);
+        intent.putExtras(data);
+        activity.startActivity(intent);
+    }
+
+    public static void startActivityAndFinish(Activity activity, Class<?> cls) {
         Intent intent = new Intent(activity, cls);
         activity.startActivity(intent);
         activity.finish();
