@@ -4,3 +4,5 @@
 
 ## 使用的框架
 * Glide
+* Okhttp3
+* Retrofit2
