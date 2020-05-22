@@ -3,7 +3,7 @@ package com.github.xiaohu409.wanandroid.mvc.model.bean;
 import java.util.List;
 
 /**
- * 首页bean
+ * banner bean
  */
 public class BannerBean extends BaseBean {
 

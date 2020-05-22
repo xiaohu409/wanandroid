@@ -17,9 +17,9 @@ import java.util.List;
  */
 public abstract class BaseRecycleAdapter<T, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
 
-    private Context context;
-    private List<T> list;
-    private LayoutInflater inflater;
+    protected Context context;
+    protected List<T> list;
+    protected LayoutInflater inflater;
     
     public BaseRecycleAdapter(Context context, List<T> list) {
         this.context = context;
@@ -29,5 +29,10 @@ public abstract class BaseRecycleAdapter<T, VH extends RecyclerView.ViewHolder> 
 
     public T getItem(int position) {
         return list.get(position);
+    }
+
+    @Override
+    public int getItemCount() {
+        return list.size();
     }
 }

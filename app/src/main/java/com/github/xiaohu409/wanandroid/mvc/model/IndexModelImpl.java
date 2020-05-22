@@ -2,7 +2,9 @@ package com.github.xiaohu409.wanandroid.mvc.model;
 
 import com.github.xiaohu409.wanandroid.mvc.api.NetManager;
 import com.github.xiaohu409.wanandroid.mvc.model.bean.BannerBean;
+import com.github.xiaohu409.wanandroid.mvc.model.bean.IndexBean;
 import com.github.xiaohu409.wanandroid.mvc.view.BannerView;
+import com.github.xiaohu409.wanandroid.mvc.view.IndexView;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -16,7 +18,7 @@ import retrofit2.Response;
  * 创建日期：2020/5/18
  * 文件版本：1.0
  */
-public class BannerModelImpl implements BannerModel<BannerBean> {
+public class IndexModelImpl implements IndexModel {
 
     @Override
     public void getBanner(final BannerView<BannerBean> view) {
@@ -28,6 +30,21 @@ public class BannerModelImpl implements BannerModel<BannerBean> {
 
             @Override
             public void onFailure(Call<BannerBean> call, Throwable t) {
+                view.onFail(t);
+            }
+        });
+    }
+
+    @Override
+    public void getIndex(int page, final IndexView<IndexBean> view) {
+        NetManager.newInstance().getServiceApi().getIndex(page).enqueue(new Callback<IndexBean>() {
+            @Override
+            public void onResponse(Call<IndexBean> call, Response<IndexBean> response) {
+                view.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<IndexBean> call, Throwable t) {
                 view.onFail(t);
             }
         });

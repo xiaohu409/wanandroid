@@ -4,15 +4,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.github.xiaohu409.wanandroid.R;
+import com.github.xiaohu409.wanandroid.mvc.adapter.IndexRecycleAdapter;
 import com.github.xiaohu409.wanandroid.mvc.base.BaseFragment;
-import com.github.xiaohu409.wanandroid.mvc.model.BannerModel;
-import com.github.xiaohu409.wanandroid.mvc.model.BannerModelImpl;
+import com.github.xiaohu409.wanandroid.mvc.model.IndexModel;
+import com.github.xiaohu409.wanandroid.mvc.model.IndexModelImpl;
 import com.github.xiaohu409.wanandroid.mvc.model.bean.BannerBean;
+import com.github.xiaohu409.wanandroid.mvc.model.bean.IndexBean;
 import com.github.xiaohu409.wanandroid.mvc.util.ImageLoaderUtil;
 import com.github.xiaohu409.wanandroid.mvc.util.IntentUtil;
 import com.github.xiaohu409.wanandroid.mvc.util.ToastUtil;
 import com.github.xiaohu409.wanandroid.mvc.view.BannerView;
+import com.github.xiaohu409.wanandroid.mvc.view.IndexView;
 import com.github.xiaohu409.wanandroid.mvc.widget.HtBanner;
 
 import java.util.ArrayList;
@@ -28,9 +34,11 @@ import java.util.List;
  */
 public class BlankFragment1 extends BaseFragment {
 
-    private BannerModel<BannerBean> bannerModel;
+    private IndexModel indexModel;
     private List<HtBanner.ImageItem> bannerList;
     private HtBanner banner;
+    private List<IndexBean.DataBean.DatasBean> indexList;
+    private IndexRecycleAdapter indexAdapter;
 
     @Override
     public int getLayoutId() {
@@ -56,16 +64,22 @@ public class BlankFragment1 extends BaseFragment {
                 IntentUtil.startActivity(getActivity(), WebViewActivity.class, data);
             }
         });
+        RecyclerView recyclerView = getView().findViewById(R.id.index_rv_id);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        indexList =  new ArrayList<>();
+        indexAdapter = new IndexRecycleAdapter(getActivity(), indexList);
+        recyclerView.setAdapter(indexAdapter);
     }
 
     @Override
     public void bindData() {
-        bannerModel = new BannerModelImpl();
+        indexModel = new IndexModelImpl();
         getBanner();
+        getIndex(0);
     }
 
     private void getBanner() {
-        bannerModel.getBanner(new BannerView<BannerBean>() {
+        indexModel.getBanner(new BannerView<BannerBean>() {
             @Override
             public void onSuccess(BannerBean result) {
                 if (result == null) {
@@ -94,4 +108,33 @@ public class BlankFragment1 extends BaseFragment {
         });
 
     }
+
+    /**
+     * 获取首页文章列表
+     * @param page
+     */
+    private void getIndex(int page) {
+        indexModel.getIndex(page, new IndexView<IndexBean>() {
+            @Override
+            public void onSuccess(IndexBean result) {
+                if (result == null) {
+                    ToastUtil.showShort("获取数据失败");
+                    return;
+                }
+                if (result.getErrorCode() != 0) {
+                    ToastUtil.showShort(result.getErrorMsg());
+                    return;
+                }
+                indexList.clear();
+                indexList.addAll(result.getData().getDatas());
+                indexAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFail(Throwable info) {
+                ToastUtil.showShort(info.getMessage());
+            }
+        });
+    }
+
 }
