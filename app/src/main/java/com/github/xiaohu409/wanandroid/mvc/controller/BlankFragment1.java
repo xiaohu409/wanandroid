@@ -32,7 +32,7 @@ import java.util.List;
  * 创建日期：2020/5/18
  * 文件版本：1.0
  */
-public class BlankFragment1 extends BaseFragment {
+public class BlankFragment1 extends BaseFragment implements IndexRecycleAdapter.AdapterItemClickCallback {
 
     private IndexModel indexModel;
     private List<HtBanner.ImageItem> bannerList;
@@ -68,7 +68,15 @@ public class BlankFragment1 extends BaseFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         indexList =  new ArrayList<>();
         indexAdapter = new IndexRecycleAdapter(getActivity(), indexList);
+        indexAdapter.setItemClickCallback(this);
         recyclerView.setAdapter(indexAdapter);
+    }
+
+    @Override
+    public void onAdapterClick(View view, IndexBean.DataBean.DatasBean bean) {
+        Bundle data = new Bundle();
+        data.putString("url", bean.getLink());
+        IntentUtil.startActivity(getActivity(), WebViewActivity.class, data);
     }
 
     @Override

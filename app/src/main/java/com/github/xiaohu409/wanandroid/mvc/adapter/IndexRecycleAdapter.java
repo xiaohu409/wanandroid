@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,8 @@ import java.util.List;
  * 首页文章列表适配器
  */
 public class IndexRecycleAdapter extends BaseRecycleAdapter<IndexBean.DataBean.DatasBean, IndexRecycleAdapter.Holder> {
+
+    private AdapterItemClickCallback itemClickCallback;
 
     public IndexRecycleAdapter(Context context, List list) {
         super(context, list);
@@ -36,19 +39,46 @@ public class IndexRecycleAdapter extends BaseRecycleAdapter<IndexBean.DataBean.D
         holder.titleView.setText(dataBean.getTitle());
         holder.shareView.setText(String.format("分享人:%s", TextUtils.isEmpty(dataBean.getShareUser()) ? dataBean.getAuthor() : dataBean.getShareUser()));
         holder.dateView.setText(String.format("时间:%s", dataBean.getNiceShareDate()));
+        holder.containerView.setOnClickListener(new ItemClick(dataBean));
     }
 
     public static class Holder extends RecyclerView.ViewHolder {
 
+        private LinearLayout containerView;
         private TextView titleView;
         private TextView shareView;
         private TextView dateView;
 
         public Holder(@NonNull View itemView) {
             super(itemView);
+            containerView = itemView.findViewById(R.id.container_ll_id);
             titleView = itemView.findViewById(R.id.title_tv_id);
             shareView = itemView.findViewById(R.id.share_tv_id);
             dateView = itemView.findViewById(R.id.date_tv_id);
         }
+    }
+
+    public class ItemClick implements View.OnClickListener {
+
+        private IndexBean.DataBean.DatasBean bean;
+
+        public ItemClick(IndexBean.DataBean.DatasBean bean) {
+            this.bean = bean;
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (itemClickCallback != null) {
+                itemClickCallback.onAdapterClick(v, bean);
+            }
+        }
+    }
+
+    public interface AdapterItemClickCallback {
+        void onAdapterClick(View view, IndexBean.DataBean.DatasBean bean);
+    }
+
+    public void setItemClickCallback(AdapterItemClickCallback itemClickCallback) {
+        this.itemClickCallback = itemClickCallback;
     }
 }
