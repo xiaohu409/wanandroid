@@ -1,14 +1,16 @@
 package com.github.xiaohu409.wanandroid.mvc.controller;
 
-import androidx.fragment.app.Fragment;
+import android.view.View;
+import android.widget.Button;
 
 import com.github.xiaohu409.wanandroid.R;
 import com.github.xiaohu409.wanandroid.mvc.base.BaseFragment;
+import com.github.xiaohu409.wanandroid.mvc.util.IntentUtil;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 个人中心
  */
-public class BlankFragment4 extends BaseFragment {
+public class BlankFragment4 extends BaseFragment implements View.OnClickListener {
 
     @Override
     public int getLayoutId() {
@@ -17,7 +19,22 @@ public class BlankFragment4 extends BaseFragment {
 
     @Override
     public void initUI() {
+        Button regBtn = getView().findViewById(R.id.reg_btn_id);
+        regBtn.setOnClickListener(this);
+        Button loginBtn = getView().findViewById(R.id.login_btn_id);
+        loginBtn.setOnClickListener(this);
+    }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.reg_btn_id:
+                IntentUtil.startActivity(getActivity(), RegActivity.class);
+                break;
+            case R.id.login_btn_id:
+
+                break;
+        }
     }
 
     @Override
