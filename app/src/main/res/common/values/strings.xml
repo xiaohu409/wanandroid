@@ -4,4 +4,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">Map</string>
+    <string name="short_label">注册10</string>
+    <string name="long_label">注册25</string>
+    <string name="message">消息</string>
 </resources>
