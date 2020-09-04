@@ -12,15 +12,17 @@
         android:roundIcon="@mipmap/app_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".mvc.controller.RegActivity"/>
+        <activity android:name=".mvc.controller.LoginActivity"></activity>
+        <activity android:name=".mvc.controller.RegActivity" />
         <activity android:name=".mvc.base.BaseTitleBarActivity" />
         <activity android:name=".mvc.controller.WebViewActivity" />
         <activity android:name=".mvc.controller.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />

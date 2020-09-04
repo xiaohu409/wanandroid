@@ -32,7 +32,7 @@ public class BlankFragment4 extends BaseFragment implements View.OnClickListener
                 IntentUtil.startActivity(getActivity(), RegActivity.class);
                 break;
             case R.id.login_btn_id:
-
+                IntentUtil.startActivity(getActivity(), LoginActivity.class);
                 break;
         }
     }
