@@ -70,4 +70,8 @@ public class RegActivity extends BaseTitleBarActivity {
         }
 
     }
+
+    private void getImsi() {
+
+    }
 }

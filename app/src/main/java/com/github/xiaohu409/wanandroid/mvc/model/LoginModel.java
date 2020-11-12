@@ -1,6 +1,7 @@
 package com.github.xiaohu409.wanandroid.mvc.model;
 
 import com.github.xiaohu409.wanandroid.mvc.model.bean.LoginBean;
+import com.github.xiaohu409.wanandroid.mvc.model.bean.LogoutBean;
 import com.github.xiaohu409.wanandroid.mvc.view.LoginView;
 
 import java.util.Map;
@@ -16,4 +17,6 @@ import java.util.Map;
 public interface LoginModel {
 
     void login(Map<String, Object> param, LoginView<LoginBean> view);
+
+    void logout(LoginView<LogoutBean> view);
 }

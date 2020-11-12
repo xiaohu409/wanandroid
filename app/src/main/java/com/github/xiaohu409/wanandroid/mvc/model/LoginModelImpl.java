@@ -2,6 +2,7 @@ package com.github.xiaohu409.wanandroid.mvc.model;
 
 import com.github.xiaohu409.wanandroid.mvc.api.NetManager;
 import com.github.xiaohu409.wanandroid.mvc.model.bean.LoginBean;
+import com.github.xiaohu409.wanandroid.mvc.model.bean.LogoutBean;
 import com.github.xiaohu409.wanandroid.mvc.view.LoginView;
 
 import java.util.Map;
@@ -30,6 +31,21 @@ public class LoginModelImpl implements LoginModel {
 
             @Override
             public void onFailure(Call<LoginBean> call, Throwable t) {
+                view.onFail(t);
+            }
+        });
+    }
+
+    @Override
+    public void logout(final LoginView<LogoutBean> view) {
+        NetManager.newInstance().getServiceApi().logout().enqueue(new Callback<LogoutBean>() {
+            @Override
+            public void onResponse(Call<LogoutBean> call, Response<LogoutBean> response) {
+                view.onSuccess(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<LogoutBean> call, Throwable t) {
                 view.onFail(t);
             }
         });

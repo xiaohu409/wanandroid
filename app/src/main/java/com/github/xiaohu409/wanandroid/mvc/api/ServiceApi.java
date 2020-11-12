@@ -3,6 +3,7 @@ package com.github.xiaohu409.wanandroid.mvc.api;
 import com.github.xiaohu409.wanandroid.mvc.model.bean.BannerBean;
 import com.github.xiaohu409.wanandroid.mvc.model.bean.IndexBean;
 import com.github.xiaohu409.wanandroid.mvc.model.bean.LoginBean;
+import com.github.xiaohu409.wanandroid.mvc.model.bean.LogoutBean;
 
 import java.util.Map;
 
@@ -45,4 +46,11 @@ public interface ServiceApi {
     @POST(login)
     @FormUrlEncoded
     Call<LoginBean> login(@FieldMap Map<String, Object> param);
+
+    /**
+     * logout
+     */
+    String logout = "/user/logout/json";
+    @GET(logout)
+    Call<LogoutBean> logout();
 }

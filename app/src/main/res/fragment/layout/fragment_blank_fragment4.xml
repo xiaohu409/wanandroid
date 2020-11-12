@@ -14,13 +14,15 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/head_tv_id"
+            android:id="@+id/head_iv_id"
             android:layout_centerInParent="true"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="昵称"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
             android:id="@+id/username_tv_id"
             android:layout_centerInParent="true"/>
 
@@ -43,6 +45,14 @@
                 android:id="@+id/login_btn_id"
                 android:text="登录"
                 android:layout_marginLeft="16dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/logout_btn_id"
+                android:text="注销"
+                android:visibility="gone"
+                tools:visibility="visible"/>
         </LinearLayout>
 
     </RelativeLayout>

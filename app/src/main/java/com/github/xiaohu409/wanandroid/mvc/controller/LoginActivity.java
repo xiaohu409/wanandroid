@@ -11,6 +11,7 @@ import com.github.xiaohu409.wanandroid.mvc.model.LoginModel;
 import com.github.xiaohu409.wanandroid.mvc.model.LoginModelImpl;
 import com.github.xiaohu409.wanandroid.mvc.model.bean.LoginBean;
 import com.github.xiaohu409.wanandroid.mvc.util.IntentUtil;
+import com.github.xiaohu409.wanandroid.mvc.util.SharePreUtil;
 import com.github.xiaohu409.wanandroid.mvc.util.ToastUtil;
 import com.github.xiaohu409.wanandroid.mvc.view.LoginView;
 
@@ -33,6 +34,7 @@ public class LoginActivity extends BaseTitleBarActivity {
     @Override
     public void initUI() {
         super.initUI();
+        setTitle("登录");
         usernameView = findViewById(R.id.username_tv_id);
         passwordView = findViewById(R.id.password_tv_id);
         loginBtn = findViewById(R.id.login_btn_id);
@@ -88,7 +90,10 @@ public class LoginActivity extends BaseTitleBarActivity {
                     return;
                 }
                 LoginBean.DataBean dataBean = result.getData();
-                ToastUtil.showLong(dataBean.getNickname());
+                //ToastUtil.showLong(dataBean.getNickname());
+                SharePreUtil.getInstance().put("nickname", dataBean.getNickname());
+                SharePreUtil.getInstance().put("username", dataBean.getUsername());
+                finish();
             }
 
             @Override
