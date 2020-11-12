@@ -35,6 +35,7 @@ public class BlankFragment4 extends BaseFragment implements View.OnClickListener
     @Override
     public void initUI() {
         headView = getView().findViewById(R.id.head_iv_id);
+        headView.setImageResource(R.mipmap.app);
         nameView = getView().findViewById(R.id.username_tv_id);
         regBtn = getView().findViewById(R.id.reg_btn_id);
         regBtn.setOnClickListener(this);

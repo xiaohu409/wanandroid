@@ -12,10 +12,12 @@
         android:background="@color/colorPrimaryDark">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
             android:id="@+id/head_iv_id"
-            android:layout_centerInParent="true"/>
+            android:layout_centerHorizontal="true"
+            tools:src="@mipmap/app"
+            android:layout_marginTop="32dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -24,7 +26,8 @@
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:id="@+id/username_tv_id"
-            android:layout_centerInParent="true"/>
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/head_iv_id"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -32,18 +35,19 @@
             android:layout_below="@id/username_tv_id"
             android:layout_centerInParent="true"
             android:layout_marginTop="16dp">
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/reg_btn_id"
-                android:text="注册"
-                android:layout_marginRight="16dp"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/login_btn_id"
                 android:text="登录"
+                android:layout_marginRight="16dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/reg_btn_id"
+                android:text="注册"
                 android:layout_marginLeft="16dp"/>
 
             <Button
