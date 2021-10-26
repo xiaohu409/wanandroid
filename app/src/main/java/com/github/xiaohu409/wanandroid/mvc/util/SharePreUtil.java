@@ -29,14 +29,14 @@ public class SharePreUtil {
     public static void initSharePreUtil(Application application, String fileName) {
         context = application.getApplicationContext();
         if (TextUtils.isEmpty(fileName)) {
-            throw new RuntimeException("SharePreUtil FileName is null");
+            throw new IllegalArgumentException("SharePreUtil FileName is null");
         }
         name = fileName;
     }
 
     private SharePreUtil() {
         if (context == null) {
-            throw new RuntimeException("Context is null");
+            throw new IllegalArgumentException("Context is null");
         }
         preferences = context.getSharedPreferences(name, Context.MODE_PRIVATE);
     }

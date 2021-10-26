@@ -20,6 +20,11 @@ import com.github.xiaohu409.wanandroid.mvc.util.ToastUtil;
 import com.github.xiaohu409.wanandroid.mvc.view.BannerView;
 import com.github.xiaohu409.wanandroid.mvc.view.IndexView;
 import com.github.xiaohu409.wanandroid.mvc.widget.HtBanner;
+import com.scwang.smart.refresh.footer.ClassicsFooter;
+import com.scwang.smart.refresh.header.MaterialHeader;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +44,9 @@ public class BlankFragment1 extends BaseFragment implements IndexRecycleAdapter.
     private HtBanner banner;
     private List<IndexBean.DataBean.DatasBean> indexList;
     private IndexRecycleAdapter indexAdapter;
+    private int pageCount;
+    private int page = 0;
+    private RefreshLayout refreshLayout;
 
     @Override
     public int getLayoutId() {
@@ -47,6 +55,30 @@ public class BlankFragment1 extends BaseFragment implements IndexRecycleAdapter.
 
     @Override
     public void initUI() {
+        refreshLayout = getView().findViewById(R.id.refreshLayout);
+        refreshLayout.setRefreshHeader(new MaterialHeader(getActivity()));
+        refreshLayout.setRefreshFooter(new ClassicsFooter(getActivity()));
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                //refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+                indexList.clear();
+                page = 0;
+                getIndex(page);
+                refreshlayout.finishRefresh();
+            }
+        });
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshlayout) {
+                //refreshlayout.finishLoadMore(2000/*,false*/);//传入false表示加载失败
+                if (page <= pageCount) {
+                    page++;
+                    getIndex(page);
+                }
+                refreshlayout.finishLoadMore();
+            }
+        });
         bannerList = new ArrayList<>();
         banner = getView().findViewById(R.id.banner_id);
         banner.setDelayTime(4000).setImageLoader(new HtBanner.ImageLoader() {
@@ -83,7 +115,7 @@ public class BlankFragment1 extends BaseFragment implements IndexRecycleAdapter.
     public void bindData() {
         indexModel = new IndexModelImpl();
         getBanner();
-        getIndex(0);
+        getIndex(page);
     }
 
     private void getBanner() {
@@ -133,8 +165,9 @@ public class BlankFragment1 extends BaseFragment implements IndexRecycleAdapter.
                     ToastUtil.showShort(result.getErrorMsg());
                     return;
                 }
-                indexList.clear();
-                indexList.addAll(result.getData().getDatas());
+                IndexBean.DataBean dataBean = result.getData();
+                pageCount = dataBean.getPageCount();
+                indexList.addAll(dataBean.getDatas());
                 indexAdapter.notifyDataSetChanged();
             }
 

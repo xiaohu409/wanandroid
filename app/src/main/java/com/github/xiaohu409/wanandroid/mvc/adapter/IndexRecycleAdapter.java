@@ -22,7 +22,7 @@ public class IndexRecycleAdapter extends BaseRecycleAdapter<IndexBean.DataBean.D
 
     private AdapterItemClickCallback itemClickCallback;
 
-    public IndexRecycleAdapter(Context context, List list) {
+    public IndexRecycleAdapter(Context context, List<IndexBean.DataBean.DatasBean> list) {
         super(context, list);
     }
 

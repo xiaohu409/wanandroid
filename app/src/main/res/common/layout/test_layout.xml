@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include
+        android:id="@+id/title_bar"
+        layout="@layout/title_bar" />
+
+    <ImageView
+        android:id="@+id/head_iv_id"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginBottom="511dp"
+        android:src="@drawable/ic_person_black_24dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_bar" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="姓名"
+        app:layout_constraintStart_toStartOf="@+id/head_iv_id"
+        app:layout_constraintTop_toBottomOf="@id/title_bar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="性别"
+        app:layout_constraintTop_toBottomOf="@id/head_iv_id"
+        app:layout_constraintRight_toRightOf="@id/head_iv_id"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="年龄"
+        android:textSize="50sp"
+        app:layout_constraintLeft_toRightOf="@id/head_iv_id"
+        app:layout_constraintTop_toBottomOf="@id/title_bar"
+        android:id="@+id/age_tv_id"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="生日"
+        app:layout_constraintBaseline_toBaselineOf="@id/age_tv_id"
+        app:layout_constraintLeft_toRightOf="@id/age_tv_id" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="地址"
+        android:textSize="50sp"
+        app:layout_constraintCircle="@id/age_tv_id"
+        app:layout_constraintCircleRadius="100dp"
+        app:layout_constraintCircleAngle="120"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintDimensionRatio="1:2"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

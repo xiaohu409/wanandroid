@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+
 /**
  * 项目名称：
  * 文件名称：
@@ -29,10 +31,7 @@ public class ToastUtil {
      * @param msg
      */
     public static void showLong(String msg) {
-        if (context == null) {
-            throw new RuntimeException("ToastUtil no initialized, call initToastUtil method");
-        }
-        Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+        showMsg(msg, Toast.LENGTH_LONG);
     }
 
     /**
@@ -40,10 +39,17 @@ public class ToastUtil {
      * @param msg
      */
     public static void showShort(String msg) {
+        showMsg(msg, Toast.LENGTH_SHORT);
+    }
+
+    public static void showMsg(String msg, int duration) {
         if (context == null) {
-            throw new RuntimeException("ToastUtil no initialized, call initToastUtil method");
+            throw new IllegalArgumentException("context is null");
         }
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+        if (msg == null) {
+            throw new IllegalArgumentException("msg is null");
+        }
+        Toast.makeText(context, msg, duration).show();
     }
 
     /**
