@@ -23,14 +23,17 @@ public class LoginModelImpl implements LoginModel {
 
     @Override
     public void login(Map<String, Object> param, final LoginView<LoginBean> view) {
+        view.showLoad();
         NetManager.newInstance().getServiceApi().login(param).enqueue(new Callback<LoginBean>() {
             @Override
             public void onResponse(Call<LoginBean> call, Response<LoginBean> response) {
+                view.hideLoad();
                 view.onSuccess(response.body());
             }
 
             @Override
             public void onFailure(Call<LoginBean> call, Throwable t) {
+                view.hideLoad();
                 view.onFail(t);
             }
         });

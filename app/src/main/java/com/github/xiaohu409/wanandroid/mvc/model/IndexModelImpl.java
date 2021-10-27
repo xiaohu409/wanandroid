@@ -37,14 +37,17 @@ public class IndexModelImpl implements IndexModel {
 
     @Override
     public void getIndex(int page, final IndexView<IndexBean> view) {
+        view.showLoad();
         NetManager.newInstance().getServiceApi().getIndex(page).enqueue(new Callback<IndexBean>() {
             @Override
             public void onResponse(Call<IndexBean> call, Response<IndexBean> response) {
+                view.hideLoad();
                 view.onSuccess(response.body());
             }
 
             @Override
             public void onFailure(Call<IndexBean> call, Throwable t) {
+                view.hideLoad();
                 view.onFail(t);
             }
         });

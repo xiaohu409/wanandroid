@@ -79,6 +79,17 @@ public class LoginActivity extends BaseTitleBarActivity {
         param.put("username", username);
         param.put("password", password);
         loginModel.login(param, new LoginView<LoginBean>() {
+
+            @Override
+            public void showLoad() {
+                //显示加载动画
+            }
+
+            @Override
+            public void hideLoad() {
+                //释放加载动画
+            }
+
             @Override
             public void onSuccess(LoginBean result) {
                 if (result == null) {

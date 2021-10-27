@@ -8,6 +8,15 @@ package com.github.xiaohu409.wanandroid.mvc.view;
  * 创建日期：2020/5/18
  * 文件版本：1.0
  */
-public interface BannerView<T> extends BaseView<T> {
+public abstract class BannerView<T> implements BaseView<T> {
 
+    @Override
+    public void showLoad() {
+
+    }
+
+    @Override
+    public void hideLoad() {
+
+    }
 }

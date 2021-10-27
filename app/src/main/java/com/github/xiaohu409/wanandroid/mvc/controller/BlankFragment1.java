@@ -155,6 +155,17 @@ public class BlankFragment1 extends BaseFragment implements IndexRecycleAdapter.
      */
     private void getIndex(int page) {
         indexModel.getIndex(page, new IndexView<IndexBean>() {
+
+            @Override
+            public void showLoad() {
+
+            }
+
+            @Override
+            public void hideLoad() {
+
+            }
+
             @Override
             public void onSuccess(IndexBean result) {
                 if (result == null) {

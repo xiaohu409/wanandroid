@@ -13,4 +13,8 @@ public interface BaseView<T> {
     void onSuccess(T result);
 
     void onFail(Throwable info);
+
+    void showLoad();
+
+    void hideLoad();
 }
