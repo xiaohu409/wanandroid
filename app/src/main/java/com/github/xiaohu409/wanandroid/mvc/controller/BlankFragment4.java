@@ -108,6 +108,16 @@ public class BlankFragment4 extends BaseFragment implements View.OnClickListener
             public void onFail(Throwable info) {
 
             }
+
+            @Override
+            public void showLoad() {
+
+            }
+
+            @Override
+            public void hideLoad() {
+
+            }
         });
 
 
