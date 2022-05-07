@@ -1,6 +1,7 @@
 package com.github.xiaohu409.wanandroid.mvc.model;
 
 import com.github.xiaohu409.wanandroid.mvc.api.NetManager;
+import com.github.xiaohu409.wanandroid.mvc.api.ServiceApi;
 import com.github.xiaohu409.wanandroid.mvc.model.bean.BannerBean;
 import com.github.xiaohu409.wanandroid.mvc.model.bean.IndexBean;
 import com.github.xiaohu409.wanandroid.mvc.view.BannerView;
