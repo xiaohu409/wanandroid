@@ -1,33 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mvc.controller.WeatherActivity"
-    android:orientation="vertical">
-    <include layout="@layout/title_bar" />
-    <RelativeLayout
+    tools:context=".mvc.controller.WeatherActivity">
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="180dp"
-            android:textColor="@android:color/holo_green_light"
-            tools:text="12℃"
-            android:textSize="88sp"
-            android:id="@+id/temp_tv_id"
-            android:layout_centerHorizontal="true"/>
+        android:layout_height="match_parent"
+        android:src="@drawable/bg"
+        android:scaleType="centerCrop"
+        android:visibility="gone"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/holo_orange_dark"
-            android:textSize="24sp"
-            tools:text="晴"
-            android:id="@+id/skycon_tv_id"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/temp_tv_id" />
-    </RelativeLayout>
+    <include layout="@layout/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/temp_tv_id"
+        android:layout_width="wrap_content"
+        android:layout_height="172dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@android:color/holo_green_light"
+        android:textSize="88sp"
+        tools:text="12℃" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="32sp"
+        tools:text="晴"
+        android:id="@+id/skycon_tv_id"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/temp_tv_id" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_purple"
+        android:textSize="16sp"
+        tools:text="空气优25"
+        android:id="@+id/air_tv_id"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/skycon_tv_id"
+        android:layout_marginTop="4dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="16sp"
+        tools:text="降水"
+        android:id="@+id/rain_tv_id"
+        android:layout_below="@id/air_tv_id"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="©Copyright5hand"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorPrimary"/>
+</RelativeLayout>

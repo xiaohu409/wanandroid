@@ -15,6 +15,7 @@ import com.github.xiaohu409.wanandroid.R;
 import com.github.xiaohu409.wanandroid.mvc.api.NetManager;
 import com.github.xiaohu409.wanandroid.mvc.api.ServiceApi;
 import com.github.xiaohu409.wanandroid.mvc.base.BaseTitleBarActivity;
+import com.github.xiaohu409.wanandroid.mvc.model.weatherbean.RainBean;
 import com.github.xiaohu409.wanandroid.mvc.model.weatherbean.RealWeatherBean;
 import com.github.xiaohu409.wanandroid.mvc.model.weatherbean.SkyconEnum;
 import com.github.xiaohu409.wanandroid.mvc.util.LocationUtil;
@@ -33,6 +34,8 @@ public class WeatherActivity extends BaseTitleBarActivity {
 
     private TextView tempView;
     private TextView skyconView;
+    private TextView airView;
+    private TextView rainView;
 
     @Override
     public int getLayoutId() {
@@ -45,6 +48,8 @@ public class WeatherActivity extends BaseTitleBarActivity {
         setTitle(getString(R.string.weather));
         tempView = findViewById(R.id.temp_tv_id);
         skyconView = findViewById(R.id.skycon_tv_id);
+        airView = findViewById(R.id.air_tv_id);
+        rainView = findViewById(R.id.rain_tv_id);
     }
 
     @Override
@@ -82,10 +87,15 @@ public class WeatherActivity extends BaseTitleBarActivity {
                 setTitle(String.format("%s %s", aMapLocation.getDistrict(), aMapLocation.getStreet()));
                 String lnglat = aMapLocation.getLongitude() + "," + aMapLocation.getLatitude();
                 getRealWeather(lnglat);
+                getRain(lnglat);
             }
         });
     }
 
+    /**
+     * 实时天气
+     * @param latlng
+     */
     private void getRealWeather(String latlng) {
         StringBuilder builder = new StringBuilder();
         builder.append(ServiceApi.weatherIp);
@@ -117,7 +127,7 @@ public class WeatherActivity extends BaseTitleBarActivity {
                 int index1 = temp.indexOf(temper);
                 span.setSpan(new SubscriptSpan(), index1, index1 + temper.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 index1 = temp.indexOf(unit);
-                span.setSpan(new RelativeSizeSpan(0.3f),
+                span.setSpan(new RelativeSizeSpan(0.25f),
                         index1, index1 + unit.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 span.setSpan(new SuperscriptSpan(), index1, index1 + unit.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 tempView.setText(span);
@@ -126,10 +136,47 @@ public class WeatherActivity extends BaseTitleBarActivity {
                 String skycon = realtimeBean.getSkycon();
                 SkyconEnum skyconEnum = SkyconEnum.valueOf(skycon);
                 skyconView.setText(skyconEnum.toString());
+
+                //空气
+                RealWeatherBean.ResultBean.RealtimeBean.AirQualityBean air = realtimeBean.getAir_quality();
+                airView.setText(String.format("空气%s%s", air.getDescription().getChn(), air.getAqi().getChn()));
             }
 
             @Override
             public void onFailure(Call<RealWeatherBean> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    /**
+     * 未来降水
+     */
+    private void getRain(String latlng) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(ServiceApi.weatherIp);
+        builder.append(ServiceApi.weatherKey);
+        builder.append(latlng);
+        builder.append(ServiceApi.rain);
+        NetManager.newInstance().getServiceApi().getRain(builder.toString()).enqueue(new Callback<RainBean>() {
+            @Override
+            public void onResponse(Call<RainBean> call, Response<RainBean> response) {
+                RainBean bean = response.body();
+                if (bean == null) {
+                    ToastUtil.showShort(getString(R.string.error) + "：获取数据失败");
+                    return;
+                }
+                if (!bean.getStatus().equals("ok")) {
+                    ToastUtil.showShort(getString(R.string.error) + "：" + bean.getStatus());
+                    return;
+                }
+                RainBean.ResultBean resultBean = bean.getResult();
+                rainView.setText(resultBean.getForecast_keypoint());
+            }
+
+            @Override
+            public void onFailure(Call<RainBean> call, Throwable t) {
 
             }
         });

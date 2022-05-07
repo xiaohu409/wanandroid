@@ -4,6 +4,7 @@ import com.github.xiaohu409.wanandroid.mvc.model.bean.BannerBean;
 import com.github.xiaohu409.wanandroid.mvc.model.bean.IndexBean;
 import com.github.xiaohu409.wanandroid.mvc.model.bean.LoginBean;
 import com.github.xiaohu409.wanandroid.mvc.model.bean.LogoutBean;
+import com.github.xiaohu409.wanandroid.mvc.model.weatherbean.RainBean;
 import com.github.xiaohu409.wanandroid.mvc.model.weatherbean.RealWeatherBean;
 
 import java.util.Map;
@@ -60,8 +61,13 @@ public interface ServiceApi {
     String weatherIp = "https://api.caiyunapp.com/v2.5";
     String weatherKey = "/Xot76B5m2kqHdPP3/";
 
+    //实时天气
     String realWeather = "/realtime";
-
     @GET
     Call<RealWeatherBean> getRealWeather(@Url String url);
+
+    //未来两小时降水
+    String rain = "/minutely";
+    @GET
+    Call<RainBean> getRain(@Url String url);
 }
