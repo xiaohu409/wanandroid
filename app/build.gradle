@@ -14,7 +14,6 @@ android {
         }
     }
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
         applicationId "com.github.xiaohu409.wanandroid"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -50,6 +49,7 @@ android {
             ]
         }
     }
+    namespace 'com.github.xiaohu409.wanandroid'
 
     applicationVariants.all { variant ->
         variant.outputs.all {
