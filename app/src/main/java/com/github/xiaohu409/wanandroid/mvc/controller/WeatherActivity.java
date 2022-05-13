@@ -58,8 +58,8 @@ public class WeatherActivity extends BaseTitleBarActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(new String[] {
                     Manifest.permission.ACCESS_COARSE_LOCATION,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-            }, REQUEST_PERMISSION_LOCATION);
+                    Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_PERMISSION_LOCATION);
         }
         else {
             location();
@@ -117,7 +117,7 @@ public class WeatherActivity extends BaseTitleBarActivity {
                 //实时天气
                 RealWeatherBean.ResultBean.RealtimeBean realtimeBean = bean.getResult().getRealtime();
                 //气温
-                String temper = String.valueOf(realtimeBean.getTemperature());
+                String temper = String.format(Locale.CHINA, "%.0f", realtimeBean.getTemperature());
                 //单位
                 String unit = "℃";
                 //温度

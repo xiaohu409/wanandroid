@@ -152,9 +152,9 @@ public class RealWeatherBean {
 
         public static class RealtimeBean {
             private String status;
-            private int temperature;
+            private double temperature;
             private double humidity;
-            private int cloudrate;
+            private double cloudrate;
             private String skycon;
             private double visibility;
             private double dswrf;
@@ -199,11 +199,11 @@ public class RealWeatherBean {
                 this.status = status;
             }
 
-            public int getTemperature() {
+            public double getTemperature() {
                 return temperature;
             }
 
-            public void setTemperature(int temperature) {
+            public void setTemperature(double temperature) {
                 this.temperature = temperature;
             }
 
@@ -215,11 +215,11 @@ public class RealWeatherBean {
                 this.humidity = humidity;
             }
 
-            public int getCloudrate() {
+            public double getCloudrate() {
                 return cloudrate;
             }
 
-            public void setCloudrate(int cloudrate) {
+            public void setCloudrate(double cloudrate) {
                 this.cloudrate = cloudrate;
             }
 
@@ -297,7 +297,7 @@ public class RealWeatherBean {
 
             public static class WindBean {
                 private double speed;
-                private int direction;
+                private double direction;
 
                 public double getSpeed() {
                     return speed;
@@ -307,11 +307,11 @@ public class RealWeatherBean {
                     this.speed = speed;
                 }
 
-                public int getDirection() {
+                public double getDirection() {
                     return direction;
                 }
 
-                public void setDirection(int direction) {
+                public void setDirection(double direction) {
                     this.direction = direction;
                 }
             }
@@ -351,7 +351,7 @@ public class RealWeatherBean {
                 public static class LocalBean {
                     private String status;
                     private String datasource;
-                    private int intensity;
+                    private double intensity;
 
                     public String getStatus() {
                         return status;
@@ -369,19 +369,19 @@ public class RealWeatherBean {
                         this.datasource = datasource;
                     }
 
-                    public int getIntensity() {
+                    public double getIntensity() {
                         return intensity;
                     }
 
-                    public void setIntensity(int intensity) {
+                    public void setIntensity(double intensity) {
                         this.intensity = intensity;
                     }
                 }
 
                 public static class NearestBean {
                     private String status;
-                    private int distance;
-                    private int intensity;
+                    private double distance;
+                    private double intensity;
 
                     public String getStatus() {
                         return status;
@@ -391,30 +391,30 @@ public class RealWeatherBean {
                         this.status = status;
                     }
 
-                    public int getDistance() {
+                    public double getDistance() {
                         return distance;
                     }
 
-                    public void setDistance(int distance) {
+                    public void setDistance(double distance) {
                         this.distance = distance;
                     }
 
-                    public int getIntensity() {
+                    public double getIntensity() {
                         return intensity;
                     }
 
-                    public void setIntensity(int intensity) {
+                    public void setIntensity(double intensity) {
                         this.intensity = intensity;
                     }
                 }
             }
 
             public static class AirQualityBean {
-                private int pm25;
-                private int pm10;
-                private int o3;
-                private int so2;
-                private int no2;
+                private double pm25;
+                private double pm10;
+                private double o3;
+                private double so2;
+                private double no2;
                 private double co;
                 /**
                  * chn : 63
@@ -429,43 +429,43 @@ public class RealWeatherBean {
 
                 private DescriptionBean description;
 
-                public int getPm25() {
+                public double getPm25() {
                     return pm25;
                 }
 
-                public void setPm25(int pm25) {
+                public void setPm25(double pm25) {
                     this.pm25 = pm25;
                 }
 
-                public int getPm10() {
+                public double getPm10() {
                     return pm10;
                 }
 
-                public void setPm10(int pm10) {
+                public void setPm10(double pm10) {
                     this.pm10 = pm10;
                 }
 
-                public int getO3() {
+                public double getO3() {
                     return o3;
                 }
 
-                public void setO3(int o3) {
+                public void setO3(double o3) {
                     this.o3 = o3;
                 }
 
-                public int getSo2() {
+                public double getSo2() {
                     return so2;
                 }
 
-                public void setSo2(int so2) {
+                public void setSo2(double so2) {
                     this.so2 = so2;
                 }
 
-                public int getNo2() {
+                public double getNo2() {
                     return no2;
                 }
 
-                public void setNo2(int no2) {
+                public void setNo2(double no2) {
                     this.no2 = no2;
                 }
 
@@ -494,22 +494,22 @@ public class RealWeatherBean {
                 }
 
                 public static class AqiBean {
-                    private int chn;
-                    private int usa;
+                    private double chn;
+                    private double usa;
 
-                    public int getChn() {
+                    public double getChn() {
                         return chn;
                     }
 
-                    public void setChn(int chn) {
+                    public void setChn(double chn) {
                         this.chn = chn;
                     }
 
-                    public int getUsa() {
+                    public double getUsa() {
                         return usa;
                     }
 
-                    public void setUsa(int usa) {
+                    public void setUsa(double usa) {
                         this.usa = usa;
                     }
                 }
@@ -567,14 +567,14 @@ public class RealWeatherBean {
                 }
 
                 public static class UltravioletBean {
-                    private int index;
+                    private double index;
                     private String desc;
 
-                    public int getIndex() {
+                    public double getIndex() {
                         return index;
                     }
 
-                    public void setIndex(int index) {
+                    public void setIndex(double index) {
                         this.index = index;
                     }
 
@@ -588,14 +588,14 @@ public class RealWeatherBean {
                 }
 
                 public static class ComfortBean {
-                    private int index;
+                    private double index;
                     private String desc;
 
-                    public int getIndex() {
+                    public double getIndex() {
                         return index;
                     }
 
-                    public void setIndex(int index) {
+                    public void setIndex(double index) {
                         this.index = index;
                     }
 
